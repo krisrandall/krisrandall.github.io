@@ -1,92 +1,92 @@
 <html>
 	
 	<head>
+		
+		<!-- this page is not mobile friendly - i'm sorry -->
 	
+		<link rel="icon" type="image/ico" href="favicon.ico"/>
 	
-		<style>
-			
-		</style>
+		<link type="text/css" rel="stylesheet" href="datasync.page.css"/>
+		
 	</head>
 	
 	<body>
 		
-		<p><a href="http://krisrandall.github.io/index.html">krisrandall.github.io</a> presents ...</p>
+		<div class="banner1">
+			
+			<p id="presents"><a href="http://krisrandall.github.io/index.html">krisrandall.github.io</a> presents ...</p>
 		
-		<h1>datasync.js
-			&nbsp;
-			<img src="logo.png" align="center" style="width:100px; height: auto" />
-			</h1>
-		
-		<a href="https://github.com/krisrandall/datasync.js" target="_blank">download from github</a>
-		
-		<h2>What is datasync.js for?</h2>
-		<p>
-			datasync.js is for creating a web-client/mobile app which is able to 
-			fetch data from, and store data to, a web server.
-		</p>
-		<p>
-			There are obviously 2 components, a server DB and the client App.<br/>
-		</p>
-		
-		<h2>Setting up the Server</h2>
-		<p>
-			<ol>
-				<li>The first step is to setup your (MySQL) database on the server </li>
-				<li>Next put the <i>datasync-server</i> direcotry (PHP code) onto the server </li>
-				<li>Set up the config for your DB and your client App in <i>datasync-server/config.php</i> </li>
-			</ol>
-			That's all that needs to be done on the server!
-		</p>
-		
-		<h2>Setting up the Client</h2>
-		<p>
-			<ol>
-				<li>Add the <i>datasync-client</i> directory to your client app</li>
-				<li>On the <b>server</b> run <i>datasync-server/generateClientJS.php</i>, and save
-					the generated code as <i>datasync-client/mydb.js</i> </li>
-				<li>Delete <i>datasync-server/generateClientJS.php</i> if you don't want everyone on the 
-					internet to be able to see your data structure</li>
-			</ol>	
-			Now your client is setup!<br/>
-			You can use datasync in your code:
-			<pre>
-							    
-			    datasync.fetchFromServer(table, where, success, fail);
-			    datasync.storeToServer(table, where, success, fail);
+			<table class="center">
+				<tr>
+					<td>
+						<img id="biglogo" src="resources/Images/icon_noBlue.png"/>
+					</td>
+					<td>
+						<h1>datasync.js</h1>
+						<p class="subtitle">
+							the web-client/mobile-app library<br/>
+							for easy server synchronisation 
+						</p>
+					</td>
+				</tr>
+			</table>
+			
+			<div align="center">
+				<a class="bigbutt" href="https://github.com/krisrandall/datasync.js">View on GitHub</a>
+				<a class="bigbutt" href="datasync.js.tutorial.html">Example</a>
+			</div>
+		</div>
 
-			</pre>
-		</p>
-		
-		<h2>A full datasync.js example</h2>
-		<p>
-			TO DO ...	
+		<div class="mid">
+			<h2 class="q">What is datasync.js for?</h2>
+			<p>
+				datasync.js is for creating a web-client/mobile app which is able to 
+				fetch data from, and store data to, a web server.
+			</p>
+			<p>
+				There are obviously 2 components, a server DB and the client App.<br/>
+			</p>
 			<br/>
-			what we will do here is make a live demo DB - not accessable via any external
-			mechanism, but we will show the tables here,
-			and then include a download bundle which includes datasync and a demo app,
-			actually, datasync.demo.html could be that demo app ....
-			it could be a simple list the data from the server,
-			and then we could do a really simple interface to update the data on the web too,
-			so they can see the changes happen ....
-			hmmmm.... but also not let them remove all data ... 
-			perhaps it is better that the web data be via some kind of feed,
-			even tweets that have the #datasync has tag mebe .. ??
-			<br/>
-		</p>
-		
-		<h2>Why not OData?</h2>
-		<p>
-			A good question.<br/>
-			OData exists at the time of developing datasync.js, however it is not yet
-			mature.
-			For example there is not a read/write PHP/MySQL OData sever library 
-			available yet and I am dis-inclinded to write one myself.
-			In the future there is no reason why datasync.js could not be modified
-			to use OData as it's protocol (and no change would even be required to
-			the datasync.js API), but for now it uses it's own protocol.
-		</p>
-		
-		
+		</div>
+
+		<div class="main">
+
+			<br/><br/>
+			
+			<div class="server">
+				<h2>Setting up the Server</h2>
+				<p>
+					<ol>
+						<li>The first step is to setup your (MySQL) database on the server </li>
+						<li>Next put the <i>datasync-server</i> direcotry (PHP code) onto the server </li>
+						<li>Set up the config for your DB and your client App in <i>datasync-server/config.php</i> </li>
+					</ol>
+					That's all that needs to be done on the server!
+				</p>				
+			</div>
+
+			<div class="client">
+				<h2>Setting up the Client</h2>
+				<p>
+					<ol>
+						<li>Add the <i>datasync-client</i> directory to your client app</li>
+						<li>On the <b>server</b> run <i>datasync-server/generateClientJS.php</i>, and save
+							the generated code as <i>datasync-client/mydb.js</i> </li>
+						<li>Delete <i>datasync-server/generateClientJS.php</i> if you don't want everyone on the 
+							internet to be able to see your data structure</li>
+					</ol>	
+					Now your client is setup!<br/><br/>
+					You can use datasync in your code:
+					<pre class="code">					
+	datasync.fetchFromServer(table, where, success, fail);
+	datasync.storeToServer(table, where, success, fail);
+					</pre>
+				</p>				
+			</div>
+
+			<br/><br/>
+		</div>
+		<br/><br/>
 	</body>
 	
 </html>
