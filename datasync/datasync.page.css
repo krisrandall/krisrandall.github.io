@@ -8,6 +8,11 @@
 	src: url("resources/Nexa_font/Nexa Light.otf") format("opentype");
 }
 
+b {
+	font-family: NexaBold, Helvetica, Verdana, Sans-Serif;	
+	font-weight: bold;
+}
+
 body{
 	margin: 0;
 	padding: 0;
