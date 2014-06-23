@@ -32,7 +32,7 @@
 			datasync.js tutorial
 			<a href="index.html" style="text-decoration:none;"><img src="resources/Images/logo.png" style="height:50px; width:auto;"/></a>
 		</h1>
-		<h2>Library Book Sales App</h2>
+		<h2>Making your Wordpress site into a phone App</h2>
 		<b>
 			
 			(<a href="datasync.js.tutorial.html">Part 1</a>)
@@ -41,21 +41,183 @@
 		</b>
 		
 		<p>
-			In Part 2 of the tutorial we will be coding the App
+			In Part 2 of the tutorial we will be actually coding the App.<br/>
+			<br/>
+			We are going to make it so simple, in this first version, it will not even check the timestamp on
+			posts and so will re-download all posts every time (adding timestamp checking logic is left as an
+			exercise for the student - Hint: checkout the datasync.setLastUpdated() function)
 		</p>
 
 		
-		<h3>Step 1. Fetching data from the server</h3>
+		<h3>Step 1. Basic App Layout</h3>
 		<p>
+			We are going for a no frills layout here;<br/>
+			First we will get rid of the aside div as we won't use the side menu.<br/>
+			We will add a button at the bottom to fetch the posts, and a list in the middle where they will be shown.<br/>
+			<br/>
+			Lets update <i>index.html</i> again to represent that:<br/>
+			(Note that the classes used below are what boilerplate uses for its styling, and the id's we will use in our JS code later)
+		<p>
+		<pre class="brush: jscript;">
+			&lt;!DOCTYPE &gt;
 			
-
+			&lt;html&gt;
+				
+				&lt;head&gt;
+					
+					&lt;as before, not duplicated here for the sake of brevity&gt;
+					
+				&lt;/head&gt;
+				
+				
+				&lt;body&gt;
+			
+					&lt;div id="header" class="royal"&gt;
+						&lt;h1&gt;My Wordpress App&lt;/h1&gt;
+					&lt;/div&gt;
+					
+					&lt;div id="main" class="white"&gt;
+						&lt;ul class="white" id="post_list"&gt;
+						&lt;/ul&gt;				
+					&lt;/div&gt;
+					
+					&lt;div id="footer" class="royal"&gt;
+						&lt;button class="button royal" id="dl_button"&gt;Download Posts&lt;/button&gt;
+					&lt;/div&gt;
+			
+					
+				&lt;/body&gt;
+				
+				
+			&lt;/html&gt;
+		</pre>	
 		<p>
-	
+			It should look like this in the browser :
+		</p>
+		<img src="resources/screenshot2.png" style="width:50%; height: auto;"/>
+		
+
+		<h3>Step 2. Fetching the posts</h3>		
+		<p>
+			This is where datasync does it's work.<br/>
+			Add all the following code to &lt;script&gt; tags in the header of <i>index.html</i><br/>
+			<br/>
+			The data is fetched from the server is a single function call:
+			<pre class="brush: jscript;">
+				$(document).ready( function() {
+					$('#dl_button').click( function() {
+						datasync.fetchFromServer('wp_posts','', listsPosts, displayError);
+					});
+				});	
+			</pre>
+			We need to code the success function, which we will call <i>listPosts()</i>:
+			<pre class="brush: jscript;">
+				function listPosts() {					
+					$('#post_list').html('');
+					mydb.thedb['wp_posts'].forEach( function(post) {
+						$('#post_list').append('<li><hr/><h3>'+post.post_title+'</h3>'+post.post_content+'<hr/></li>');
+					});
+				}
+			</pre>			
+			for the fail function we will just do an alert message:
+			<pre class="brush: jscript;">
+				function displayError(err) {
+					alert(JSON.stringify(err));
+				}
+			</pre>
+			We also add this line (into $(document).ready()) so that the local database posts are listed when the app starts:
+			<pre class="brush: jscript;">
+				$(document).on('datasync_ready', listPosts ); // this loads all local posts at startup
+			</pre>
+		</p>
+		
+		
+		<h3><b>Checking</b></h3>
+		<p>
+			At this point our <i>index.html</i> should look like this :		
+		</p>
+		<pre class="brush: jscript;">
+		
+			&lt;html&gt;
+				
+				&lt;head&lt;
+					
+					<script src="datasync-client/libs/jquery/jquery.js"></script>
+					<script src="datasync-client/libs/underscore/underscore.js"></script>
+					<script src="datasync-client/libs/jaydata/jaydata.js"></script>
+					<script src="datasync-client/libs/helperlib.js"></script>
+					<script src="datasync-client/datasync.js"></script>
+					<script src="datasync-client/mydb.js"></script>   
+					<script src="libs/transit/js/jquery.transit.min.js"></script>
+					
+							
+					<!-- standard App appearance and functionality -->
+					<link href="libs/boilerplate/css/boilerplate.css" rel="stylesheet">	
+					<script src="libs/boilerplate/js/boilerplate.js"></script>
+					
+					<script>
+					
+						$(document).ready( function() {
+							$('#dl_button').click( function() {
+								datasync.fetchFromServer('wp_posts','post_type="post"', listPosts, displayError);
+							});
+							
+							$(document).on('datasync_ready', listPosts ); // this loads all local posts at startup
+						});
+					
+						function listPosts() {					
+							$('#post_list').html('');
+							mydb.thedb['wp_posts'].forEach( function(post) {
+								$('#post_list').append('<li><hr/><h3>'+post.post_title+'</h3>'+post.post_content+'<hr/></li>');
+							});
+						}
+						
+						function displayError(err) {
+							alert(JSON.stringify(err));
+						}
+					
+					</script>
+					
+				&lt;/head&gt;
+				
+				
+				&lt;body&gt;
+			
+					<div id="header" class="royal">
+						<h1>My Wordpress App</h1>
+					</div>
+					
+					<div id="main" class="white">
+						<ul class="white" id="post_list">
+						</ul>				
+					</div>
+					
+					<div id="footer" class="royal">
+						<button class="button royal" id="dl_button">Download Posts</button>
+					</div>
+					
+					
+				&lt;/body&gt;
+				
+				
+			&lt;/html&gt;
+		</pre>		
+		<p>
+			And after you click the "Download Posts" button your app should look something like this :
+		</p>
+		<img src="resources/screenshot3.png" style="width:50%; height: auto;"/>
+		<p>
+			And if you go and add a Wordpress post and then click the Download Posts button again,
+			the new posts will appear.
+		</p>
+		
+				
 		<h2>
-			This tutorial is currently being developed<br/>
-			Please check back in a few days ...
+			If you have got yours working like this, well done!<br/>
+			you are ready to go to 
+			<b><a href="datasync.js.tutorial-3.html">Part 3</a></b>
 		</h2>
-	
+		
 				
 	</body>
 	

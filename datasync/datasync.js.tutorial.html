@@ -56,74 +56,21 @@
 		
 		<h3>The Concept</h3>
 		<p>
-			Let's make it something useful.<br/>
-			I love when public libraries have
-			sales of their books - it is the most fun way, I think, to build up
-			your home library.<br/>
-			This App will store a listing of libraries and the date(s) they have
-			their sales (usually anually).
+			To complete this tutorial you must have an existing <a href="https://wordpress.org/" target="_blank">Wordpress</a> site
+			that you host yourself (where you can upload files to the server).<br/>
+			If you don't have a Wordpress site currently, you can download it from <a href="https://wordpress.org/download/">here</a>
+			and install it on your server.
 		</p>
 		<p>
-			For now lets just store the following information for a library:
-			<ul>
-				<li>Library ID</li>
-				<li>Name</li>
-				<li>Address</li>
-				<li>Phone Number</li>
-			</ul>
-			And for the book sales we will store:
-			<ul>
-				<li>Book Sale ID</li>
-				<li>Library ID</li>
-				<li>Date of Sale</li>
-			</ul>
+			We are going to make an App which downloads all the posts from your
+			wordpress site and presents them to the user.
 		</p>
+
 		
-		<h3>Step 1. Create the Database</h3>
-		<p>
-			On your server use <a href="http://www.phpmyadmin.net/home_page/index.php">phpMyAdmin</a> or 
-			the <a href="http://dev.mysql.com/doc/refman/5.6/en/mysql.html">MySQL command line</a> to create your 
-			database.
-			
-			<pre class="brush: sql;">
-				--
-				-- Database: `librarybooksales`
-				--
-				
-				-- --------------------------------------------------------
-				
-				--
-				-- Table structure for table `library`
-				--
-				
-				CREATE TABLE `library` (
-				  `id` int(11) NOT NULL AUTO_INCREMENT,
-				  `name` varchar(120) COLLATE latin1_general_ci NOT NULL,
-				  `address` text COLLATE latin1_general_ci NOT NULL,
-				  `phone` varchar(40) COLLATE latin1_general_ci NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
-				
-				-- --------------------------------------------------------
-				
-				--
-				-- Table structure for table `booksale`
-				--
-				
-				CREATE TABLE `booksale` (
-				  `id` int(11) NOT NULL AUTO_INCREMENT,
-				  `library_id` int(11) NOT NULL,
-				  `date_of_sale` date NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;				
-			</pre>
-		</p>
-		
-		
-		<h3>Step 2. Install datasync Server </h3>
+		<h3>Step 1. Install datasync on the Server </h3>
 		<p>
 			<a href="https://github.com/krisrandall/datasync.js/archive/master.zip">Download datasync.js</a> <br/>
-			and copy the datasync-server directory to your webserver document root<br/>
+			and copy the <i>datasync-server</i> directory to your Wordpress webserver document root<br/>
 			and then edit <i>datasync-server/config.php</i> on your server:
 			
 			<pre class="brush: php;">
@@ -131,27 +78,27 @@
 				
 				// ** App settings - You determine these when you create your app ** //
 				
-				define('APP_NAME', 'librarybooksales');  				/** Your name for your app */
+				define('APP_NAME', 'MyWordpressApp');  				/** Your name for your app */
 				define('APP_SECRET_KEY', 'tutorial_secret_pass');   	/** A password you make up */
 				
 				
 				// ** MySQL settings - You can get this info from your web host ** //
 				
-				define('DB_NAME', 'librarybooksales');				/** The name of the database */
-				define('DB_USER', '??????????????');				/** MySQL database username */
-				define('DB_PASSWORD', '??????????????');			/** MySQL database password */
-				define('DB_HOST', 'localhost');						/** MySQL hostname */
+				define('DB_NAME', 'YOUR WP DB NAME');				/** The name of the database */
+				define('DB_USER', 'YOUR WP DB USER NAME');				/** MySQL database username */
+				define('DB_PASSWORD', 'YOUR WP DB USER PASSWORD');			/** MySQL database password */
+				define('DB_HOST', 'YOUR WP HOST');						/** MySQL hostname */
 				
 				
 				
 				// ** fetchable_tables is a list of all tables that the client is allow to query ** //
 				
-				$fetchable_tables = array( 'library', 'booksales' );
+				$fetchable_tables = array( 'wp_posts' );
 				
 				
 				// ** storeable_tables is a list of all tables that the client is allow to update ** //
 				
-				$storeable_tables = array(  );
+				$storeable_tables = array(  ); 
 				
 				
 				?&gt;				
@@ -159,7 +106,7 @@
 		</p>
 		
 		
-		<h3>Step 3. Create the client App boilerplate </h3>
+		<h3>Step 2. Create the client App boilerplate </h3>
 		<p>
 			We will use the mobile app 
 			<a href="https://github.com/krisrandall/boilerplate" target="_blank">boilerplate</a>
@@ -184,19 +131,19 @@
 		</p>
 		
 		
-		<h3>Step 4. Generate the <i>mydb.js</i> file</h3>
+		<h3>Step 3. Generate the <i>mydb.js</i> file</h3>
 		<p>
 			The <i>mydb.js</i> file is used by datasync.js to replicate your server DB as a local DB in your app.
 			<br/>
 			You create it by accessing this URL : 
-			<a href="#" onClick="alert('You need to go to this file on your server.'); return false;">http://[YOURSERVER.com]/[PATH]/datasync-server/generateClientJS.php</a>
+			<a href="#" onClick="alert('You need to go to this file on your server.'); return false;">http://YOUR SERVER.com/PATH TO WORDPRESS/datasync-server/generateClientJS.php</a>
 			<br/>
 			It should look like this :<br/>
 			<pre class="brush: jscript;">
 				/**
 				 *
 				 *  This file is auto generated by datasync-server/generateClientJS.php
-				 *  (DB: librarybooksales, DTS: Jun 23 2014 05:39:51 GMT)
+				 *  (DB: samplewpdatabase, DTS: Jun 23 2014 07:15:21 GMT)
 				 *
 				 *  Save this file with your client app code as datasync-client/mydb.js 
 				 *
@@ -225,16 +172,54 @@
 					lastUpdatedDTS: { type: "text" }
 				});
 					
-				$data.Entity.extend("library", {
+				$data.Entity.extend("wp_posts", {
 					local_id: { type: "int", key: true, computed: true }, 
 					id: { type: "int" },
-					name: { type: "text" },
-					address: { type: "text" },
-					phone: { type: "text" }
+					post_author: { type: "int" },
+					post_date: { type: "datetime" },
+					post_date_gmt: { type: "datetime" },
+					post_content: { type: "text" },
+					post_title: { type: "text" },
+					post_excerpt: { type: "text" },
+					post_status: { type: "text" },
+					comment_status: { type: "text" },
+					ping_status: { type: "text" },
+					post_password: { type: "text" },
+					post_name: { type: "text" },
+					to_ping: { type: "text" },
+					pinged: { type: "text" },
+					post_modified: { type: "datetime" },
+					post_modified_gmt: { type: "datetime" },
+					post_content_filtered: { type: "text" },
+					post_parent: { type: "int" },
+					guid: { type: "text" },
+					menu_order: { type: "int" },
+					post_type: { type: "text" },
+					post_mime_type: { type: "text" },
+					comment_count: { type: "int" }
 				});
-						
-				$data.Entity.extend("booksales", {
-					local_id: { type: "int", key: true, computed: true }, 				
+					
+				
+				$data.EntityContext.extend("MyDB", {
+					control: { type: $data.EntitySet, elementType: control },	 
+					wp_posts: { type: $data.EntitySet, elementType: wp_posts }
+				});
+					
+				
+				
+				var mydb = {
+					
+					version : '1.0', /* this should come from the API - future enhancement */
+					
+					app_url : 'http://localhost/mywordpresssite/wordpress/datasync-server',
+					app_key : 'My_WP_App',
+					app_key_suffix : 'tutorial_secret_pass',
+					
+					thedb : new MyDB("My_WP_App") 
+					
+				};
+
+			
 			</pre>
 			<p>
 				Save this file in the <i>datasync-client</i> sub directory of your App directory.
@@ -242,7 +227,7 @@
 		</p>
 		
 		
-		<h3>Step 5. Add <i>datasync.js</i> and <i>mydb.js</i> to your App</h3>
+		<h3>Step 4. Add <i>datasync.js</i> and <i>mydb.js</i> to your App</h3>
 		<p>
 			In <i>index.html</i>, add all of the following:
 		</p>
@@ -312,9 +297,9 @@
 		</pre>
 		
 		<p>
-			And in the browswer it should show this :
+			And in the browswer it should look like this :
 		</p>
-		<img src="resources/screenshot1.png"/>
+		<img src="resources/screenshot1.png" style="width:50%; height: auto;"/>
 		
 		<h2>
 			If you have got yours working like this, well done!<br/>
