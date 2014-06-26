@@ -1,0 +1,30 @@
+
+/* this is the div that the share buttons go inside of */
+div.click_sharing {
+    border:none; 
+    text-align:right; 
+    padding: 0; 
+    margin:0;
+}
+
+/* this is an individual share button */
+.share {
+	width: 16px;
+	height: 16px;
+	margin: 4px;
+	cursor: pointer;
+	background-size: 16px 16px;
+	display: inline-block;
+
+}
+.share:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+
+
+.email {
+	background-image: url('../../images/share_icons/email.png');
+}
+

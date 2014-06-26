@@ -1,0 +1,60 @@
+/* Layout Sheet 5 */
+/* Last Updated 24-11-2003 GT */
+
+body { 
+
+	margin: 0px;
+	padding: 0px;
+}
+
+.padded {
+	margin: 0px;
+	padding: 20px;
+}
+
+#bodycopy {
+	margin-left: 187px;
+}
+
+#info {
+	width: 100%;
+	float: left;
+}
+
+#widespan {
+	width: 100%;
+	float: left;
+}
+
+#header {
+	width: 100%;
+}
+
+#column2c1 {
+	width: 48%;
+	float: left;
+	margin-bottom: 15px;
+}
+
+#column1c1 {
+	width: 100%;
+	float: left;
+	margin-bottom: 15px;
+	min-height: 558px;
+}
+
+#column2c2 {
+	width: 48%;
+	float: right;
+	margin-bottom: 15px;
+}
+
+#menu {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 147px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
