@@ -1,0 +1,85 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Panda Appeal Demo Site</title>
+    <meta name="description" content="Pand Appeal - Demonstrating the power and simplicity of Smartcontracts with Metamask">
+    <meta name="author" content="ConsenSys">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <script src="./app.js"></script>
+
+</head>
+
+<body>
+
+    <section class="header">
+            <img src="images/icon.png"/> 
+            <h1>Panda Appeal</h1>
+            <span id="status"></span>
+    </section>
+
+    <section class="articles main">
+            <div class="article panda-img"></div>
+            <div class="article">
+              <div class="initial-hide ready-now">
+                <h2>One-Click Transparent Donation</h2>
+                <div class="text-contents ">
+                  <span data-editableproperty="text">Donate to the Panda Appeal using Panda Tokens via your MetaMask wallet.
+                      <small>(You have <span class="balance">?</span> Ether)</small><br><br>
+                    <strong>Donate now and receive your Panda Tokens</strong>
+                    <ol>
+                      <li>Quick one-click donation</li>
+                      <li>Lower transaction and administration fees</li>
+                      <li>Transparent token distribution</li>
+                    </ol>
+                  </span>
+                  
+                </div>
+
+                <button class="initial-hide orange-button donate-button" onclick="App.donate(100000000000000000)"> Donate <small>0.1 ETH</small> Now! </button>
+                
+              </div>
+              <div class="initial-hide no-metamask">
+                <h2>Install Metamask</h2>
+                <div class="text-contents">
+                  Before donating to the Panda Appeal, you must install the Metamask Chrome extension
+                  <br/>
+                  <br/>
+                  First <a target="_blank" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">Get Metamask</a>
+                  <br/>
+                  <br/>
+                  Then <a href="/">Refresh Page</a>
+                </div>
+              </div>
+              <div class="initial-hide no-accounts">
+                <h2>Unlock Metamask</h2>
+                Couldn't get any accounts! Make sure your Ethereum client is configured correctly.
+                <br/>
+                <br/>
+                Click the Metamask icon in your browser bar and ensure you are setup and unlocked.
+                <br/>
+                <br/>
+                Then <a href="/">Refresh Page</a>
+              </div>
+            </div>
+            <div class="article">
+                Endangered pandas are being abused, trafficked and killed by global crime networks.<br><br>Your donation will work to strengthen anti-poaching laws – and train and equip teams to track down panda poachers and bring them before the law.<br><br>Your support will also help protect the habitats pandas need to survive, and work with communities to find peaceful ways to live side by side with them.<br><br>
+            </div>
+            <div class="article articles">
+
+              <div id="contract-explanation"></div>
+
+            </div>
+
+    </section>
+
+    <section class="footer">
+        <span>ConsenSys 2017</span>
+        <img src="images/consensys.png" style="right"/> 
+    </section>
+
+</body>
+</html>

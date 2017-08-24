@@ -1,0 +1,113 @@
+{
+  "contract_name": "PandaToken",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "whom",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "tokenFaucet",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balances",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "destination",
+          "type": "address"
+        }
+      ],
+      "name": "sendTokens",
+      "outputs": [
+        {
+          "name": "remainingBal",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "balance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "payable": false,
+      "type": "fallback"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000c57fe5b5b60018054600160a060020a03191633600160a060020a03161790555b5b610245806100396000396000f300606060405236156100515763ffffffff60e060020a600035041663178edaf1811461006757806327e235e31461009857806329322e05146100c65780638da5cb5b146100f7578063b69ef8a814610123575b341561005957fe5b6100655b60006000fd5b565b005b341561006f57fe5b610086600160a060020a0360043516602435610145565b60408051918252519081900360200190f35b34156100a057fe5b610086600160a060020a036004351661016c565b60408051918252519081900360200190f35b34156100ce57fe5b610086600435600160a060020a036024351661017e565b60408051918252519081900360200190f35b34156100ff57fe5b6101076101ed565b60408051600160a060020a039092168252519081900360200190f35b341561012b57fe5b6100866101fc565b60408051918252519081900360200190f35b600160a060020a038216600090815260208190526040902080548201908190555b92915050565b60006020819052908152604090205481565b600160a060020a0333166000908152602081905260408120548390106101cc57600160a060020a03338116600090815260208190526040808220805487900390559184168152208054840190555b50600160a060020a0333166000908152602081905260409020545b92915050565b600154600160a060020a031681565b600160a060020a0333166000908152602081905260409020545b905600a165627a7a72305820e1242db4db6c4a15ceb715e2b2b950267c2543332a5aa78df90c93c812cb56840029",
+  "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x86561fa98ba28e1eb5322172891cd87fb067e8c8",
+      "updated_at": 1503436356943
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1503467511646
+}
