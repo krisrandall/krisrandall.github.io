@@ -1,0 +1,56 @@
+<html>
+
+    <head>
+
+        <title>Who has Syphilis ?</title>
+
+        <style>
+            #background {
+                width: 100%; 
+                height: 100%; 
+                position: absolute; 
+                left: 0px; 
+                top: 0px; 
+                z-index: 0;
+            }
+
+            .stretch {
+                width:100%;
+                height:100%;
+            }
+        </style>
+
+        <script>
+
+            var factFiles = [
+                '1.png',
+                '2.png',
+                '3.png'
+            ]
+        
+            function toggleBetweenHomeAndFactFiles() {
+                if (screenState=='home') {
+                    // choose a random fact file image to display
+                    var randomIndex = Math.floor(Math.random() * factFiles.length);
+                    document.getElementById('pic').src = factFiles[randomIndex];
+                    screenState='fact';
+                } else {
+                    document.getElementById('pic').src='home.png';
+                    screenState='home';
+                }
+            }
+
+            var screenState = 'home';
+
+        </script>
+    
+    </head>
+
+
+    <body onclick="toggleBetweenHomeAndFactFiles();">
+        <div id="background">
+            <img id="pic" src="home.png" class="stretch" alt=""/>
+        </div>
+    </body>
+
+</html>
