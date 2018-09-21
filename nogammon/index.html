@@ -22,22 +22,38 @@
 
         <script>
 
+            var currFactIndex = 1;
             var factFiles = [
+                'home.png',
+                '4.png',
                 '1.png',
                 '2.png',
-                '3.png'
-            ]
+                '3.png',
+                '5.png',
+                '6.png',
+                '7.png',
+                '8.png',
+                '9.png'
+            ];
         
             function toggleBetweenHomeAndFactFiles() {
                 if (screenState=='home') {
-                    // choose a random fact file image to display
-                    var randomIndex = Math.floor(Math.random() * factFiles.length);
-                    document.getElementById('pic').src = factFiles[randomIndex];
+                    // display current fact
+                    document.getElementById('pic').src = factFiles[currFactIndex];
                     screenState='fact';
+                    // and increment
+                    currFactIndex++;
+                    if (currFactIndex>=factFiles.length) currFactIndex=0;
                 } else {
                     document.getElementById('pic').src='home.png';
                     screenState='home';
                 }
+            }
+
+            function nextOne() {
+                document.getElementById('pic').src = factFiles[currFactIndex];
+                currFactIndex++;
+                if (currFactIndex>=factFiles.length) currFactIndex=0;
             }
 
             var screenState = 'home';
@@ -47,7 +63,7 @@
     </head>
 
 
-    <body onclick="toggleBetweenHomeAndFactFiles();">
+    <body onclick="nextOne();">
         <div id="background">
             <img id="pic" src="home.png" class="stretch" alt=""/>
         </div>
